@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>inner Course page</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+</head>
+<body>
+
+
+
+<div><a type="button" th:href="@{/allCompanies}"
+        class="btn btn-primary"> MAIN PAGE</a></div>
+
+
+<div>
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <div class="text"><h1>LESSON</h1></div>
+
+
+            <th scope="col">#</th>
+            <th scope="col">Lesson name</th>
+            <th scope="col">more</th>
+            <th scope="col">edit</th>
+            <th scope="col">delete</th>
+
+        </tr>
+        </thead>
+        <div th:each="lesson:${lessons}">
+            <tbody>
+            <tr>
+                <th scope="row" th:text="${lesson.id}"></th>
+                <td th:text="${lesson.lessonName}"></td>
+
+                <td><a type="button" th:href="@{/allInLesson/{lessId}(lessId=${lesson.getId()})}">more</a></td>
+
+
+                <td><a type="button" th:href="@{/editLesson/{lessonId}(lessonId=${lesson.getId()})}" class="card-link">
+                    EDIT</a></td>
+
+                <td>
+                    <form th:method="DELETE" th:action="@{/deleteLesson/{lessonId2}/{id}(lessonId2=${lesson.getId()},id=${courseId})}">
+                        <input type="submit" th:value="DELETE"/>
+                    </form>
+                </td>
+            </tr>
+        </div>
+
+    </table>
+
+    <div class="addCourseButton"><td><a th:href="@{/newLesson/{courseId}(courseId=${courseId})}"
+                                         class="btn btn-primary">ADD LESSON</a></td></div>
+</div>
+
+
+<h1>-----------------------------------------------------------------------------------------</h1>
+
+
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

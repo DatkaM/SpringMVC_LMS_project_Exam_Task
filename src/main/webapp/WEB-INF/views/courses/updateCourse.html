@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>update course</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+
+</head>
+<body>
+
+<div><a type="button" th:href="@{/allCompanies}"
+        class="btn btn-primary"> MAIN PAGE</a></div>
+
+<form th:method="PATCH"
+      th:action="@{/updateCourse/{companyId}(companyId=${course.getId()})}"
+      th:object="${course}">
+
+    <!--<form th:method="PATCH" th:action="@{/{idCompany}/updateCourse(idCompany=${course.getId()})}" th:object="${course}">-->
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Course Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{courseName}">
+        <div id="emailHelp" class="form-text"></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="date" class="form-label">Date of start</label>
+        <input type="text" class="form-control" id="date" th:field="*{dateOfStart}">
+    </div>
+
+    <div class="mb-3">
+        <label for="duration" class="form-label">Duration</label>
+        <input type="text" class="form-control" id="duration" th:field="*{duration}">
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input type="text" class="form-control" id="image" th:field="*{image}">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" th:field="*{description}">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">UPDATE</button>
+
+</form>
+
+<!--<a type="button" th:href="@{/allCompanies}"> Back to Company List</a>-->
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>

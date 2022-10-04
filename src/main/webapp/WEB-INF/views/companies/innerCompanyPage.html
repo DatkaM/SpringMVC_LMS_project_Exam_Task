@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inner company page</title>
+    <style>
+        .text{
+            text-align: center;
+        }
+        .text2{
+            text-align: center;
+        }
+        .addCourseButton{
+            text-align: center;
+        }
+        .addInstructorButton{
+            text-align: center;
+        }
+
+        body {
+            background-size: cover;
+            background-image: url(https://learn.zoner.com/wp-content/uploads/2019/10/pinterest.jpg?fidl=2019-06-mag-en);
+        }
+    </style>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div><a type="button" th:href="@{/allCompanies}"
+        class="btn btn-primary"> MAIN PAGE</a></div>
+
+
+<div class="container">
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <div class="text"><h1>COURSES</h1></div>
+
+
+            <th scope="col">#</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Date of start</th>
+            <th scope="col">duration</th>
+            <th scope="col">image</th>
+            <th scope="col">description</th>
+            <th scope="col">more</th>
+            <th scope="col">edit</th>
+            <th scope="col">delete</th>
+
+        </tr>
+        </thead>
+        <div th:each="course:${courses}">
+            <tbody>
+            <tr>
+                <th scope="row" th:text="${course.id}"></th>
+                <td th:text="${course.courseName}"></td>
+                <td th:text="${course.dateOfStart}"></td>
+                <td th:text="${course.duration}"></td>
+                <td th:text="${course.image}"></td>
+                <td th:text="${course.description}"></td>
+
+                <td><a th:href="@{/allInCourses/{courseId}(courseId=${course.id})}"
+                       class="btn btn-primary">more</a></td>
+
+                <td><a type="button" th:href="@{/editCourse/{courId}(courId=${course.getId()})}" class="card-link">
+                    edit please don't press</a></td>
+
+                <td>
+                    <form th:method="DELETE" th:action="@{/deleteCourse/{id}/{compId}(id=${course.getId()},compId=${companyId})}">
+                        <input type="submit" th:value="DELETE"/>
+                    </form>
+                </td>
+            </tr>
+        </div>
+    </table>
+`
+    <div  class="addCourseButton"><td><a th:href="@{/newCourse/{id}(id=${companyId})}"
+                                         class="btn btn-primary">ADD COURSE</a></td></div>
+</div>
+<a type="button" th:href="@{/allCompanies}"> MAIN PAGE</a>
+
+
+<h1>*********************************************************************************************</h1>
+
+
+
+<div class="insTable">
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <div class="text2"><h1>INSTRUCTOR</h1></div>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">phone number</th>
+            <th scope="col">email</th>
+            <th scope="col">specialization</th>
+            <th scope="col">edit</th>
+            <th scope="col">delete</th>
+            <th scope="col">courses</th>
+
+        </tr>
+        </thead>
+        <div th:each="instructor:${instructors}">
+            <tbody>
+            <tr>
+                <th scope="row" th:text="${instructor.id}"></th>
+                <td th:text="${instructor.firstName}"></td>
+                <td th:text="${instructor.getLastName()}"></td>
+                <td th:text="${instructor.getPhoneNumber()}"></td>
+                <td th:text="${instructor.getEmail}"></td>
+                <td th:text="${instructor.getSpecialization}"></td>
+
+                <td><a type="button" th:href="@{/editInstructor/{id}(id=${instructor.getId()})}"
+                                       class="card-link">edit</a></td>
+                <td>
+                    <form th:method="DELETE"
+                          th:action="@{/deleteInstructor/{compId2}/{id}(compId2=${companyId},id=${instructor.id})}">
+                        <input type="submit" th:value="DELETE"/>
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </div>
+    </table>
+
+    <div class="addInstructorButton"><td><a th:href="@{/newInstructor/{id}(id=${companyId})}"
+                                            class="btn btn-primary">ADD INSTRUCTOR</a></td></div>
+</div>
+
+
+<h1>*****************************************************************************************************</h1>
+
+
+<div class="studentTable">
+    <table class="table table-bordered border-primary">
+        <thead>
+        <tr>
+            <div class="text2"><h1>STUDENT</h1></div>
+            <th scope="col">#</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Phone number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Study format</th>
+            <th scope="col">edit</th>
+            <th scope="col">delete</th>
+        </tr>
+        </thead>
+
+        <div th:each="student:${students}"></div>
+        <tbody>
+        <tr>
+            <th scope="row" th:text="${student.id}"></th>
+            <td th:text="${student.firstName}"></td>
+            <td th:text="${student.lastName}"></td>
+            <td th:text="${student.phoneNumber}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.studyFormat}"></td>
+
+
+            <td><a type="button" th:href="@{/editStudent/{updateId}(updateId=${student.getId()})}"
+                   class="card-link">edit</a></td>
+            <td>
+
+            <td> <form th:method="DELETE"
+                       th:action="@{/deleteStudent/{studentId}/{id}(studentId=${student.getId()},id=${companyId})}">
+                <input type="submit" th:value="DELETE"/>
+            </form></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="addInstructorButton"><td><a th:href="@{/newStudent/{justId}(justId=${student.id})}"
+                                            class="btn btn-primary">ADD STUDENT</a></td></div>
+</div>
+
+
+
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+

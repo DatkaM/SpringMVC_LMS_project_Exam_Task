@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main company page</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+          crossorigin="anonymous">
+
+
+    <style>
+        .datka {
+            justify-content: center;
+            align-items: center;
+            padding-left: 45%;
+        }
+
+        body {
+            background-size: cover;
+            background-image: url(https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png);
+        }
+
+        .container {
+            padding: 10% 10% 10% 10%;
+        }
+    </style>
+</head>
+<body>
+
+<div><a type="button" th:href="@{/allCompanies}"
+        class="btn btn-primary"> MAIN PAGE</a></div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Located Country</th>
+            <th scope="col">more</th>
+            <th scope="col">update</th>
+            <th scope="col">delete</th>
+        </tr>
+        </thead>
+        <div th:each="company:${allCompany}">
+            <tbody>
+            <tr>
+                <th scope="row" th:text="${company.getId()}"></th>
+                <td th:text="${company.getCompanyName()}"></td>
+                <td th:text="${company.getLocatedCountry()}"></td>
+
+
+                <td><a th:href="@{/allCourses/{id}(id=${company.getId()})}"
+                       class="btn btn-primary">more</a></td>
+
+
+                <td><a type="button" class="btn btn-success"
+                       th:href="@{/edit/{id}(id = ${company.getId})}">edit</a>
+                </td>
+
+                <td>
+                    <form th:method="DELETE" th:action="@{/{id}/delete(id=${company.getId()})}">
+                        <input type="submit" th:value="DELETE"/>
+                    </form>
+                </td>
+
+            </tr>
+            </tbody>
+        </div>
+    </table>
+</div>
+
+<div class="datka">
+    <td><a type="button" class="btn btn-success" th:href="@{/new}">Add Company</a></td>
+</div>
+
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
